@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://bl8kqkkvyu45x"]
+
+[ext_resource type="Script" uid="uid://d01727kaaoot6" path="res://Scripts/enermy.gd" id="1_up2ev"]
+[ext_resource type="Texture2D" uid="uid://bsrxs7jq5bijl" path="res://Sprites/Characters/character_0024.png" id="2_ak60x"]
+[ext_resource type="Texture2D" uid="uid://ddet178p7k0xp" path="res://Sprites/Characters/character_0025.png" id="3_6ogtc"]
+[ext_resource type="Texture2D" uid="uid://1pb5uo1oajwh" path="res://Sprites/Characters/character_0026.png" id="4_o6n7j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lsmp6"]
+
+[sub_resource type="Animation" id="Animation_chwpn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_ak60x")]
+}
+
+[sub_resource type="Animation" id="Animation_wrinw"]
+resource_name = "fly"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_ak60x"), ExtResource("3_6ogtc"), ExtResource("4_o6n7j")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_af3po"]
+_data = {
+&"RESET": SubResource("Animation_chwpn"),
+&"fly": SubResource("Animation_wrinw")
+}
+
+[node name="Enermy" type="Area2D"]
+script = ExtResource("1_up2ev")
+move_direction = Vector2(0, -50)
+
+[node name="Sprite" type="Sprite2D" parent="."]
+position = Vector2(82, -7)
+texture = ExtResource("2_ak60x")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(81, -6)
+shape = SubResource("CircleShape2D_lsmp6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_af3po")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
