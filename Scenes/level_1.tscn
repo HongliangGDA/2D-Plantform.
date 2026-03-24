@@ -1,16 +1,29 @@
-[gd_scene load_steps=7 format=4 uid="uid://kpcdi73a4b7t"]
+[gd_scene load_steps=9 format=4 uid="uid://kpcdi73a4b7t"]
 
+[ext_resource type="Script" uid="uid://dbv4jeuxuksrv" path="res://Scripts/background_parallax.gd" id="1_lsmp6"]
 [ext_resource type="Texture2D" uid="uid://bl2gdm4g2v5h0" path="res://Sprites/Backgrounds/backgroundForest.png" id="1_xfk5q"]
 [ext_resource type="TileSet" uid="uid://bqmvx1c5tscbh" path="res://Sprites/Tiles/new_tile_set.tres" id="2_7p6j4"]
 [ext_resource type="PackedScene" uid="uid://o3gygdad3uw6" path="res://Scenes/player.tscn" id="3_6444e"]
 [ext_resource type="PackedScene" uid="uid://bl8kqkkvyu45x" path="res://Scenes/enermy.tscn" id="4_7p6j4"]
 [ext_resource type="PackedScene" uid="uid://b625kl70la87i" path="res://Scenes/coin.tscn" id="5_6444e"]
 [ext_resource type="PackedScene" uid="uid://clvrxgl6jp3ye" path="res://Scenes/end_flag.tscn" id="6_evi0p"]
+[ext_resource type="PackedScene" uid="uid://d3ggcocjk2gxi" path="res://Scenes/level_2.tscn" id="8_xrdnt"]
 
 [node name="Main" type="Node2D"]
 
-[node name="BackgroundSprite" type="Sprite2D" parent="."]
-position = Vector2(415, 87)
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("1_lsmp6")
+
+[node name="BackgroundSprite" type="Sprite2D" parent="Background"]
+position = Vector2(1434, 78)
+texture = ExtResource("1_xfk5q")
+
+[node name="BackgroundSprite2" type="Sprite2D" parent="Background"]
+position = Vector2(411, 77)
+texture = ExtResource("1_xfk5q")
+
+[node name="BackgroundSprite3" type="Sprite2D" parent="Background"]
+position = Vector2(-607, 74)
 texture = ExtResource("1_xfk5q")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -19,7 +32,7 @@ tile_map_data = PackedByteArray("AAD+/wEAAAABAAYAAAD+/wIAAAABAAcAAAD//wEAAAACAAY
 tile_set = ExtResource("2_7p6j4")
 
 [node name="Player" parent="." instance=ExtResource("3_6444e")]
-position = Vector2(3, -2)
+position = Vector2(22, -3)
 
 [node name="Coins" type="Node" parent="."]
 
@@ -32,7 +45,7 @@ position = Vector2(179, 15)
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Enermy2" parent="Enemies" instance=ExtResource("4_7p6j4")]
-position = Vector2(70, 50)
+position = Vector2(69, 48)
 
 [node name="Enermy" parent="Enemies" instance=ExtResource("4_7p6j4")]
 
@@ -41,4 +54,5 @@ position = Vector2(135, 17)
 move_speed = 30.0
 
 [node name="EndFlag" parent="." instance=ExtResource("6_evi0p")]
-scene_to_load = ExtResource("3_6444e")
+position = Vector2(201, 69)
+scene_to_load = ExtResource("8_xrdnt")
